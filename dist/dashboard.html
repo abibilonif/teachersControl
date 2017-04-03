@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Administración</title>
+    <link rel="stylesheet" href="../assets/material/material.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="../assets/scss/red.css">
+    <link rel="stylesheet" href="../assets/scss/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../assets/js/select2-4.0.3/dist/css/select2.min.css">
+    <link rel="stylesheet" href="../assets/js/jQueryUI-1.11.4/jquery-ui.min.css">
+
+</head>
+<body>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title"><img class="LogoLiceu" src="src/LogoLiceu.png"/></span>
+            <!-- Add spacer, to align navigation to the right -->
+            <div class="mdl-layout-spacer"></div>
+            <!-- Navigation. We hide it in small screens. -->
+            <nav class="mdl-navigation">
+                <div class="header-btn">
+                    <button tabindex="1" class="btn-red" onclick="initDialog()">Informes</button>
+                <select id="languageSelect" class="select2-selection__arrow btn-red" tabindex="2">
+                    <option name="castellano" selected>Castellano</option>
+                    <option name="catalan">Catalan</option>
+                    <option name="ingles">Ingles</option>
+                    <option name="aleman">Aleman</option>
+                </select>
+                    <button tabindex="3" class="btn-red" onclick="closeSesion()">Tancar sessió</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main class="mdl-layout__content">
+        <div class="page-content" id="tableContent">
+            <table id="searchTeachers" class="mdl-data-table table-bordered table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Usuario</th>
+                    <th>Nombre</th>
+                    <th>Primer Apellido</th>
+                    <th>Segundo Apellido</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Tipo</th>
+                </tr>
+                </thead>
+                <tbody id="tbody"></tbody>
+                <tfoot>
+                <tr>
+                    <th>Usuario</th>
+                    <th>Nombre</th>
+                    <th>Primer Apellido</th>
+                    <th>Segundo Apellido</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Tipo</th>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div id="initAudit" title="Informe personalizado">
+            <form action="#">
+                <div>
+                    <div class="mdl-textfield">
+                        <div class="dateLabel">Data de inici</div>
+                        <input class="mdl-textfield__input" type="text" id="dateInit" tabindex="1">
+                    </div>
+                </div>
+                <div>
+                    <div class="mdl-textfield">
+                        <div class="dateLabel">Data final</div>
+                        <input class="mdl-textfield__input" type="text" id="dateEnd" tabindex="2">
+                    </div>
+                </div>
+                <div>
+                    <div class="mdl-textfield">
+                        <div class="dateLabel">Professors</div>
+                        <select id="selectTeacher" multiple="multiple" tabindex="3"></select>
+                    </div>
+                </div>
+                <button class="mdl-button btn-red" id="btnAudit" onclick="filterData()" tabindex="4">Aceptar</button>
+            </form>
+        </div>
+    </main>
+</div>
+<script src="../assets/js/jQuery-2.2.4/jquery-2.2.4.js"></script>
+<script src="../assets/js/jQueryUI-1.11.4/jquery-ui.js"></script>
+<script src="../assets/js/jquery.dataTables.min.js"></script>
+<script src="../assets/material/material.min.js"></script>
+<script src="../assets/js/select2-4.0.3/dist/js/select2.full.min.js"></script>
+<script src="../assets/js/functions.js"></script>
+</body>
+</html>

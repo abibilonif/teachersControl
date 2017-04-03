@@ -1,0 +1,28 @@
+@import "colors";
+$list_colors: $red $blue $green $yellow $orange $ligth $dark;
+$list_name: "red" "blue" "green" "yellow" "orange" "ligth" "dark";
+
+
+@each $color in $list_colors{
+ $i: index($list_colors, $color);
+ .btn-#{nth($list_name,$i)} {
+  @if(nth($list_name,$i)=="ligth"){
+   color: black;
+  }@else {
+   color:white;
+   font-weight: bolder;
+   padding: 1%;
+  }
+  background-color: darken($color,20%);
+  border-color: darken($color,35%);
+  border-radius: 5px;
+  &:hover {
+   color: darken($color,20%) !important;
+   @if(nth($list_name,$i)=="ligth"){
+    background-color: black !important;
+   }@else {
+    background-color:white !important;
+   }
+  }
+ }
+}

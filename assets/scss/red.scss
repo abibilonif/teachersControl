@@ -1,0 +1,254 @@
+@import "partials/colors";
+@import "partials/button";
+
+$primary: $red;
+$primary_name: "red";
+* {
+  color: darken($primary, 25%);
+}
+
+header {
+  background-color: white !important;
+  border-bottom: inset 0.2em darken($primary, 25%) !important;
+}
+
+.LogoLiceu {
+  height: 60%;
+  width: 60%;
+}
+
+#menuTitle {
+  border-bottom: inset 0.2em darken($primary, 25%) !important;
+}
+
+//CSS LOGIN
+.mdl-textfield__input {
+  border-bottom: solid 1px darken($primary, 25%);
+}
+
+main {
+  background-color: darken($primary, 20%);
+}
+
+#form {
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 5px;
+  background-color: white;
+  width: 50%;
+  padding: 5%;
+  border: inset 0.1em darken($primary, 35%) !important;
+}
+
+.ui-dialog {
+  text-align: center;
+  background-color: white;
+  border: inset 0.2em darken($primary, 35%) !important;
+  border-radius: 5px;
+  opacity: 90;
+  z-index: 1040;
+}
+
+.ui-button {
+  background-color: darken($primary, 35%) !important;
+  padding: 2% 15% 2% 15%;
+  border-radius: 5px;
+  margin: 5%;
+  > .ui-button-text {
+    color: white !important;
+  }
+}
+
+.ui-dialog-titlebar {
+  padding: 2%;
+  background-color: darken($primary, 20%);
+  font-weight: bolder;
+  span {
+    color: white !important;
+  }
+}
+
+.ui-dialog-titlebar-close {
+  display: none;
+}
+
+#contentDialog {
+  padding: 2%;
+}
+
+//CSS DASHBOARD
+#tableContent {
+  margin: 0 auto;
+  padding: 2%;
+  width: 90%;
+  background-color: white;
+}
+
+thead {
+  background-color: darken($primary, 20%) !important;
+  font-weight: bolder;
+  color: white !important;
+  width: 100%;
+  .DataTables_sort_wrapper {
+    color: white !important;
+  }
+  td {
+    color: white !important;
+  }
+}
+
+tbody {
+  width: 100%;
+}
+
+.mdl-data-table {
+  th, td {
+    padding: 0;
+    text-align: center !important;
+  }
+  td {
+    overflow: auto;
+    text-overflow: ellipsis;
+
+  }
+}
+
+#searchTeachers {
+  table-layout: fixed;
+  display: inline-table;
+  width: 100% !important;
+  background-color: white;
+}
+
+.dt-button {
+  > a {
+    text-decoration: none;
+    background-color: darken($primary, 20%) !important;
+    border: 0.2em solid darken($primary, 35%);
+  }
+  > span {
+    color: white;
+    font-weight: bolder;
+  }
+  &:hover {
+    > span {
+      color: darken($primary, 20%) !important;
+      background-color: white !important;
+    }
+  }
+}
+  .ui-state-default, .ui-widget-content .ui-state-default, .ui-state-default {
+    background: darken($primary, 20%) !important;
+  }
+  .ui-button, .ui-state-default, .ui-datepicker-header {
+    background-color: darken($primary, 20%) !important;
+    color: white !important;
+    >a {
+      background-color: white !important;
+      color: darken($primary, 25%) !important;
+    }
+  }
+  .ui-widget-header {
+    text-align: center;
+    background: darken($primary, 20%) !important;
+    border: 0.2em solid darken($primary, 35%) !important;
+    color: white !important;
+  }
+  .ui-dialog .ui-dialog-title {
+    float: none;
+  }
+
+  .ui-datepicker-month, .ui-datepicker-year {
+    width: 100%;
+    -moz-appearance: none;
+    padding: 1%;
+    background-color: darken($primary, 20%) !important;
+    color: white;
+    font-weight: bolder !important;
+    border: 0.2em solid darken($primary, 35%) !important;
+    border-radius: 5px !important;
+    &:hover {
+      background-color: white !important;
+      color: darken($primary, 20%) !important;
+    }
+    > option {
+      background-color: white;
+      color: darken($primary, 25%);
+      ::selection {
+        color: white;
+      }
+    }
+  }
+.ui-icon, .ui-widget-content .ui-icon {
+  background-image: url("../../assets/js/jQueryUI-1.11.4/images/ui-icons_222222_256x240.png") !important;
+}
+#languageSelect{
+  width: 100%;
+  -moz-appearance: none;
+}
+  //CSS AUDITS
+  .ui-widget-content {
+    background-color: white !important;
+    button.ui-state-default {
+      background-color: white !important;
+        &:hover {
+        border: 0.15em solid orangered !important;
+      }
+    }
+  }
+
+  .ui-datepicker-calendar {
+    span {
+      color: white !important;
+    }
+    a.ui-state-default, .ui-icon-closethick, button.ui-state-default {
+      background-color: white !important;
+      color:darken($primary, 25%) !important;
+      &:hover {
+        background-color:darken($primary, 25%)!important;
+        color: white !important;
+      }
+    }
+  }
+  .ui-datepicker-header {
+    background-color: white !important;
+  }
+  .dateLabel {
+    font-weight: bolder !important;
+    background-color: darken($primary, 20%) !important;
+    color: white !important;
+    border: 0.2em solid darken($primary, 35%) !important;
+    border-radius: 5px;
+  }
+
+  .select2-container {
+    margin-top: 2%;
+    width: 80% !important;
+  }
+
+  #formContent {
+    position: absolute;
+    top: 10%;
+    left: 20%;
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 5px;
+    background-color: white;
+    width: 50%;
+    padding: 5%;
+    border: inset 0.1em darken($primary, 35%) !important;
+  }
+
+  .header-btn {
+    display: flex;
+    width: auto;
+    > button {
+      margin: 1%;
+    }
+    > select {
+      margin: 1%;
+    }
+  }

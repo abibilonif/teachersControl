@@ -1,0 +1,274 @@
+.btn-red {
+  color: white;
+  font-weight: bolder;
+  padding: 1%;
+  background-color: #a82315;
+  border-color: #64150c;
+  border-radius: 5px; }
+  .btn-red:hover {
+    color: #a82315 !important;
+    background-color: white !important; }
+
+.btn-blue {
+  color: white;
+  font-weight: bolder;
+  padding: 1%;
+  background-color: #164666;
+  border-color: #091b27;
+  border-radius: 5px; }
+  .btn-blue:hover {
+    color: #164666 !important;
+    background-color: white !important; }
+
+.btn-green {
+  color: white;
+  font-weight: bolder;
+  padding: 1%;
+  background-color: #145b32;
+  border-color: #061c10;
+  border-radius: 5px; }
+  .btn-green:hover {
+    color: #145b32 !important;
+    background-color: white !important; }
+
+.btn-yellow {
+  color: white;
+  font-weight: bolder;
+  padding: 1%;
+  background-color: #927608;
+  border-color: #493b04;
+  border-radius: 5px; }
+  .btn-yellow:hover {
+    color: #927608 !important;
+    background-color: white !important; }
+
+.btn-orange {
+  color: white;
+  font-weight: bolder;
+  padding: 1%;
+  background-color: #924d10;
+  border-color: #4d2909;
+  border-radius: 5px; }
+  .btn-orange:hover {
+    color: #924d10 !important;
+    background-color: white !important; }
+
+.btn-ligth {
+  color: black;
+  background-color: #b1c2c6;
+  border-color: #859fa5;
+  border-radius: 5px; }
+  .btn-ligth:hover {
+    color: #b1c2c6 !important;
+    background-color: black !important; }
+
+.btn-dark {
+  color: white;
+  font-weight: bolder;
+  padding: 1%;
+  background-color: #10161c;
+  border-color: black;
+  border-radius: 5px; }
+  .btn-dark:hover {
+    color: #10161c !important;
+    background-color: white !important; }
+
+* {
+  color: #921e12; }
+
+header {
+  background-color: white !important;
+  border-bottom: inset 0.2em #921e12 !important; }
+
+.LogoLiceu {
+  height: 60%;
+  width: 60%; }
+
+#menuTitle {
+  border-bottom: inset 0.2em #921e12 !important; }
+
+.mdl-textfield__input {
+  border-bottom: solid 1px #921e12; }
+
+main {
+  background-color: #a82315; }
+
+#form {
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 5px;
+  background-color: white;
+  width: 50%;
+  padding: 5%;
+  border: inset 0.1em #64150c !important; }
+
+.ui-dialog {
+  text-align: center;
+  background-color: white;
+  border: inset 0.2em #64150c !important;
+  border-radius: 5px;
+  opacity: 90;
+  z-index: 1040; }
+
+.ui-button {
+  background-color: #64150c !important;
+  padding: 2% 15% 2% 15%;
+  border-radius: 5px;
+  margin: 5%; }
+  .ui-button > .ui-button-text {
+    color: white !important; }
+
+.ui-dialog-titlebar {
+  padding: 2%;
+  background-color: #a82315;
+  font-weight: bolder; }
+  .ui-dialog-titlebar span {
+    color: white !important; }
+
+.ui-dialog-titlebar-close {
+  display: none; }
+
+#contentDialog {
+  padding: 2%; }
+
+#tableContent {
+  margin: 0 auto;
+  padding: 2%;
+  width: 90%;
+  background-color: white; }
+
+thead {
+  background-color: #a82315 !important;
+  font-weight: bolder;
+  color: white !important;
+  width: 100%; }
+  thead .DataTables_sort_wrapper {
+    color: white !important; }
+  thead td {
+    color: white !important; }
+
+tbody {
+  width: 100%; }
+
+.mdl-data-table th, .mdl-data-table td {
+  padding: 0;
+  text-align: center !important; }
+.mdl-data-table td {
+  overflow: auto;
+  text-overflow: ellipsis; }
+
+#searchTeachers {
+  table-layout: fixed;
+  display: inline-table;
+  width: 100% !important;
+  background-color: white; }
+
+.dt-button > a {
+  text-decoration: none;
+  background-color: #a82315 !important;
+  border: 0.2em solid #64150c; }
+.dt-button > span {
+  color: white;
+  font-weight: bolder; }
+.dt-button:hover > span {
+  color: #a82315 !important;
+  background-color: white !important; }
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-state-default {
+  background: #a82315 !important; }
+
+.ui-button, .ui-state-default, .ui-datepicker-header {
+  background-color: #a82315 !important;
+  color: white !important; }
+  .ui-button > a, .ui-state-default > a, .ui-datepicker-header > a {
+    background-color: white !important;
+    color: #921e12 !important; }
+
+.ui-widget-header {
+  text-align: center;
+  background: #a82315 !important;
+  border: 0.2em solid #64150c !important;
+  color: white !important; }
+
+.ui-dialog .ui-dialog-title {
+  float: none; }
+
+.ui-datepicker-month, .ui-datepicker-year {
+  width: 100%;
+  -moz-appearance: none;
+  padding: 1%;
+  background-color: #a82315 !important;
+  color: white;
+  font-weight: bolder !important;
+  border: 0.2em solid #64150c !important;
+  border-radius: 5px !important; }
+  .ui-datepicker-month:hover, .ui-datepicker-year:hover {
+    background-color: white !important;
+    color: #a82315 !important; }
+  .ui-datepicker-month > option, .ui-datepicker-year > option {
+    background-color: white;
+    color: #921e12; }
+    .ui-datepicker-month > option ::selection, .ui-datepicker-year > option ::selection {
+      color: white; }
+
+.ui-icon, .ui-widget-content .ui-icon {
+  background-image: url("../../assets/js/jQueryUI-1.11.4/images/ui-icons_222222_256x240.png") !important; }
+
+#languageSelect {
+  width: 100%;
+  -moz-appearance: none; }
+
+.ui-widget-content {
+  background-color: white !important; }
+  .ui-widget-content button.ui-state-default {
+    background-color: white !important; }
+    .ui-widget-content button.ui-state-default:hover {
+      border: 0.15em solid orangered !important; }
+
+.ui-datepicker-calendar span {
+  color: white !important; }
+.ui-datepicker-calendar a.ui-state-default, .ui-datepicker-calendar .ui-icon-closethick, .ui-datepicker-calendar button.ui-state-default {
+  background-color: white !important;
+  color: #921e12 !important; }
+  .ui-datepicker-calendar a.ui-state-default:hover, .ui-datepicker-calendar .ui-icon-closethick:hover, .ui-datepicker-calendar button.ui-state-default:hover {
+    background-color: #921e12 !important;
+    color: white !important; }
+
+.ui-datepicker-header {
+  background-color: white !important; }
+
+.dateLabel {
+  font-weight: bolder !important;
+  background-color: #a82315 !important;
+  color: white !important;
+  border: 0.2em solid #64150c !important;
+  border-radius: 5px; }
+
+.select2-container {
+  margin-top: 2%;
+  width: 80% !important; }
+
+#formContent {
+  position: absolute;
+  top: 10%;
+  left: 20%;
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 5px;
+  background-color: white;
+  width: 50%;
+  padding: 5%;
+  border: inset 0.1em #64150c !important; }
+
+.header-btn {
+  display: flex;
+  width: auto; }
+  .header-btn > button {
+    margin: 1%; }
+  .header-btn > select {
+    margin: 1%; }
+
+/*# sourceMappingURL=red.css.map */

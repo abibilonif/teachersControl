@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Administracion</title>
+    <link rel="stylesheet" href="../assets/material/material.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="../assets/js/jQueryUI-1.11.4/jquery-ui.min.css">
+    <link rel="stylesheet" href="../assets/scss/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../assets/scss/red.css">
+</head>
+<body>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title"><img class="LogoLiceu" src="src/LogoLiceu.png" alt="Logo el Liceu"/></span>
+            <!-- Add spacer, to align navigation to the right -->
+            <div class="mdl-layout-spacer"></div>
+            <!-- Navigation. We hide it in small screens. -->
+            <nav class="mdl-navigation mdl-layout--large-screen-only">
+                <a class="mdl-navigation__link" onclick="closeSesion()">Cerrar sesion</a>
+            </nav>
+        </div>
+    </header>
+    <main class="mdl-layout__content" id="container">
+        <div class="page-content">
+            <div id="form">
+                <form action="#">
+                    <div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" id="nameUser" tabindex="1">
+                        <label class="mdl-textfield__label" for="nameUser" title="Introduce nombre de usuario">Nombre de usuario</label>
+                    </div>
+                    </div>
+                    <div>
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="password" id="passUser" tabindex="2">
+                        <label class="mdl-textfield__label" for="passUser" title="Introduce contraseña del usuario">Contraseña de usuario</label>
+                    </div>
+                    </div>
+                    <button class="mdl-button btn-red" id="btnLogin" tabindex="3">Acceptar</button>
+                </form>
+            </div>
+            <div id="resetForm" title="Error de identificación">
+                <p id="contentDialog">Usuario o contraseña incorrectos</p>
+            </div>
+        </div>
+    </main>
+</div>
+<script src="../assets/js/jQuery-2.2.4/jquery-2.2.4.js"></script>
+<script src="../assets/js/jQueryUI-1.11.4/jquery-ui.js"></script>
+<script src="../assets/js/jquery.dataTables.min.js"></script>
+<script src="../assets/material/material.min.js"></script>
+<script src="../assets/js/functions.js"></script>
+</body>
+</html>

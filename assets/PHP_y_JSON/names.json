@@ -1,0 +1,30 @@
+{
+  "joan": [
+    {
+      "name": "Joan",
+      "firstname": "Galmes",
+      "lastname": "Riera"
+    }
+  ],
+  "aina": [
+    {
+      "name": "Aina",
+      "firstname": "Bibiloni",
+      "lastname": "Fortuny"
+    }
+  ],
+  "pep": [
+    {
+      "name": "Pep",
+      "firstname": "Buades",
+      "lastname": "Matamales"
+    }
+  ],
+  "sandra": [
+    {
+      "name": "Sandra",
+      "firstname": "Garcia",
+      "lastnames": "Lliteras"
+    }
+  ]
+}
