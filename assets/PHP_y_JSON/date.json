@@ -1,0 +1,386 @@
+{
+  "1": [
+    null
+  ],
+  "2": [
+    {
+      "id": 1,
+      "usuario": "Joan",
+      "fecha": "18-03-17",
+      "hora": "15:47:37",
+      "tipo": "Entrada"
+    }
+  ],
+  "3": [
+    null
+  ],
+  "4": [
+    {
+      "id": 2,
+      "usuario": "Joan",
+      "fecha": "18-03-17",
+      "hora": "15:47:40",
+      "tipo": "Entrada"
+    }
+  ],
+  "5": [
+    null
+  ],
+  "6": [
+    {
+      "id": 3,
+      "usuario": "Joan",
+      "fecha": "18-03-17",
+      "hora": "15:47:42",
+      "tipo": "Salida"
+    }
+  ],
+  "7": [
+    null
+  ],
+  "8": [
+    {
+      "id": 4,
+      "usuario": "Joan",
+      "fecha": "18-03-17",
+      "hora": "15:47:44",
+      "tipo": "Salida"
+    }
+  ],
+  "9": [
+    null
+  ],
+  "10": [
+    {
+      "id": 5,
+      "usuario": "Joan",
+      "fecha": "18-03-17",
+      "hora": "15:47:46",
+      "tipo": "Entrada"
+    }
+  ],
+  "11": [
+    null
+  ],
+  "12": [
+    {
+      "id": 6,
+      "usuario": "Joan",
+      "fecha": "18-03-17",
+      "hora": "15:47:48",
+      "tipo": "Salida"
+    }
+  ],
+  "13": [
+    null
+  ],
+  "14": [
+    {
+      "id": 7,
+      "usuario": "Joan",
+      "fecha": "18-03-17",
+      "hora": "15:47:50",
+      "tipo": "Entrada"
+    }
+  ],
+  "15": [
+    null
+  ],
+  "16": [
+    {
+      "id": 8,
+      "usuario": "Joan",
+      "fecha": "18-03-17",
+      "hora": "15:47:52",
+      "tipo": "Salida"
+    }
+  ],
+  "17": [
+    null
+  ],
+  "18": [
+    {
+      "id": 1,
+      "usuario": "Aina",
+      "fecha": "18-03-17",
+      "hora": "15:48:06",
+      "tipo": "Entrada"
+    }
+  ],
+  "19": [
+    null
+  ],
+  "20": [
+    {
+      "id": 2,
+      "usuario": "Aina",
+      "fecha": "18-03-17",
+      "hora": "15:48:08",
+      "tipo": "Entrada"
+    }
+  ],
+  "21": [
+    null
+  ],
+  "22": [
+    {
+      "id": 3,
+      "usuario": "Aina",
+      "fecha": "18-03-17",
+      "hora": "15:48:11",
+      "tipo": "Salida"
+    }
+  ],
+  "23": [
+    null
+  ],
+  "24": [
+    {
+      "id": 4,
+      "usuario": "Aina",
+      "fecha": "18-03-17",
+      "hora": "15:48:13",
+      "tipo": "Salida"
+    }
+  ],
+  "25": [
+    null
+  ],
+  "26": [
+    {
+      "id": 5,
+      "usuario": "Aina",
+      "fecha": "18-03-17",
+      "hora": "15:48:15",
+      "tipo": "Entrada"
+    }
+  ],
+  "27": [
+    null
+  ],
+  "28": [
+    {
+      "id": 6,
+      "usuario": "Aina",
+      "fecha": "18-03-17",
+      "hora": "15:48:17",
+      "tipo": "Entrada"
+    }
+  ],
+  "29": [
+    null
+  ],
+  "30": [
+    {
+      "id": 7,
+      "usuario": "Aina",
+      "fecha": "18-03-17",
+      "hora": "15:48:19",
+      "tipo": "Salida"
+    }
+  ],
+  "31": [
+    null
+  ],
+  "32": [
+    {
+      "id": 8,
+      "usuario": "Aina",
+      "fecha": "18-03-17",
+      "hora": "15:48:21",
+      "tipo": "Salida"
+    }
+  ],
+  "33": [
+    null
+  ],
+  "34": [
+    {
+      "id": 1,
+      "usuario": "Pep",
+      "fecha": "18-03-17",
+      "hora": "15:48:36",
+      "tipo": "Entrada"
+    }
+  ],
+  "35": [
+    null
+  ],
+  "36": [
+    {
+      "id": 2,
+      "usuario": "Pep",
+      "fecha": "18-03-17",
+      "hora": "15:48:38",
+      "tipo": "Entrada"
+    }
+  ],
+  "37": [
+    null
+  ],
+  "38": [
+    {
+      "id": 3,
+      "usuario": "Pep",
+      "fecha": "18-03-17",
+      "hora": "15:48:40",
+      "tipo": "Salida"
+    }
+  ],
+  "39": [
+    null
+  ],
+  "40": [
+    {
+      "id": 4,
+      "usuario": "Pep",
+      "fecha": "18-03-17",
+      "hora": "15:48:43",
+      "tipo": "Salida"
+    }
+  ],
+  "41": [
+    null
+  ],
+  "42": [
+    {
+      "id": 5,
+      "usuario": "Pep",
+      "fecha": "18-03-17",
+      "hora": "15:48:45",
+      "tipo": "Salida"
+    }
+  ],
+  "43": [
+    null
+  ],
+  "44": [
+    {
+      "id": 6,
+      "usuario": "Pep",
+      "fecha": "18-03-17",
+      "hora": "15:48:47",
+      "tipo": "Entrada"
+    }
+  ],
+  "45": [
+    null
+  ],
+  "46": [
+    {
+      "id": 7,
+      "usuario": "Pep",
+      "fecha": "18-03-17",
+      "hora": "15:48:49",
+      "tipo": "Entrada"
+    }
+  ],
+  "47": [
+    null
+  ],
+  "48": [
+    {
+      "id": 8,
+      "usuario": "Pep",
+      "fecha": "18-03-17",
+      "hora": "15:48:53",
+      "tipo": "Entrada"
+    }
+  ],
+  "49": [
+    null
+  ],
+  "50": [
+    {
+      "id": 9,
+      "usuario": "Pep",
+      "fecha": "18-03-17",
+      "hora": "15:48:55",
+      "tipo": "Salida"
+    }
+  ],
+  "51": [
+    null
+  ],
+  "52": [
+    {
+      "id": 1,
+      "usuario": "Sandra",
+      "fecha": "18-03-17",
+      "hora": "15:49:09",
+      "tipo": "Entrada"
+    }
+  ],
+  "53": [
+    null
+  ],
+  "54": [
+    {
+      "id": 2,
+      "usuario": "Sandra",
+      "fecha": "18-03-17",
+      "hora": "15:49:12",
+      "tipo": "Entrada"
+    }
+  ],
+  "55": [
+    null
+  ],
+  "56": [
+    {
+      "id": 3,
+      "usuario": "Sandra",
+      "fecha": "18-03-17",
+      "hora": "15:49:15",
+      "tipo": "Salida"
+    }
+  ],
+  "57": [
+    null
+  ],
+  "58": [
+    {
+      "id": 4,
+      "usuario": "Sandra",
+      "fecha": "18-03-17",
+      "hora": "15:49:17",
+      "tipo": "Salida"
+    }
+  ],
+  "59": [
+    null
+  ],
+  "60": [
+    {
+      "id": 5,
+      "usuario": "Sandra",
+      "fecha": "18-03-17",
+      "hora": "15:49:19",
+      "tipo": "Salida"
+    }
+  ],
+  "61": [
+    null
+  ],
+  "62": [
+    {
+      "id": 6,
+      "usuario": "Sandra",
+      "fecha": "18-03-17",
+      "hora": "15:49:21",
+      "tipo": "Salida"
+    }
+  ],
+  "63": [
+    null
+  ],
+  "64": [
+    {
+      "id": 7,
+      "usuario": "Sandra",
+      "fecha": "18-03-17",
+      "hora": "15:49:24",
+      "tipo": "Entrada"
+    }
+  ]
+}
