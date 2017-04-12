@@ -2,45 +2,48 @@
  * Created by laia on 17/03/17.
  */
 //FUNCIONES GLOBALES
-var loaded = false;
 var dataTable;
-if ($(location).attr('href').indexOf('index.html') != -1) {
-    //Dialog de error de login
-    $("#resetForm").dialog({
-        my: "center top", at: "center top+75", of: "#container",
-        autoOpen: false,
-        buttons: {
-            OK: function () {
-                $(this).dialog("close");
-                $(location).attr('href', 'index.html');
-            }
-        }
+checkLocalStorage();
+function hasLog(data) {
+    //    Llamada AJAX
+    var log = $.ajax({url: "http://localhost/ionic/logAdmin.php", type: "POST", data: data});
+    return log.done(function (resp) {
+        return resp;
     });
-    if (loaded == false) {
-        initLogin();
-    }
-} else if ($(location).attr('href').indexOf('dashboard.html') != -1) {
-    if (localStorage.login != undefined) {
-        initDashboard();
-    } else {
-        $(location).attr('href', 'index.html');
+}
+//Funcion que comprueba si hay login
+function checkLocalStorage() {
+    $("#contentDialog").css('display','hide');
+    if ($(location).attr('href').indexOf('index.html') != -1) {
+        //Dialog de error de login
+        $("#resetForm").dialog({
+            my: "center top", at: "center top+75", of: "#container",
+            autoOpen: false,
+            buttons: {
+                OK: function () {
+                    $(this).dialog("close");
+                    $(location).attr('href', 'index.html');
+                }
+            }
+        });
+        if (localStorage.login == undefined) {
+            initLogin();
+        }else{
+            $(location).attr('href', 'dashboard.html');
+        }
+    } else if ($(location).attr('href').indexOf('dashboard.html') != -1) {
+        if (localStorage.login != undefined) {
+            initDashboard();
+        } else {
+            $(location).attr('href', 'index.html');
+            initLogin();
+        }
     }
 }
 //Funcion cerrar sesion
 function closeSesion() {
     window.localStorage.clear();
     $(location).attr('href', 'index.html');
-    loaded = false;
-    url = '';
-}
-//Funcion que comprueba si hay login
-function checkLocalStorage() {
-    var login = window.localStorage.login;
-    if ($(location).attr('href').indexOf('index.html') != -1) {
-        if (login != undefined) {
-            $(location).attr('href', "dashboard.html");
-        }
-    }
 }
 //FUNCIONES PARA LOGIN
 function initLogin() {
@@ -50,19 +53,15 @@ function initLogin() {
             pass: $('#passUser').val()
         };
         if (login.user && login.pass) {
-            $.ajax({
-                url: "http://localhost/ionic/logAdmin.php",
-                type: "POST",
-                data: login,
-                complete: function (resp) {
-                    if (resp.responseText == 'OK') {
-                        window.localStorage.setItem('login', JSON.stringify(login));
-                        $(location).attr('href', 'dashboard.html');
-                    } else {
-                        $('#resetForm').dialog("open");
-                    }
+            $.when(hasLog(login)).then(function (data) {
+                if (data == "OK") {
+                    window.localStorage.setItem('login', JSON.stringify(login));
+                    $(location).attr('href', 'dashboard.html');
+                    initDashboard();
+                } else {
+                    $('#resetForm').dialog("open");
                 }
-            })
+            });
         } else {
             $('#contentDialog').html("Introduce usuario y contraseña");
             $('#resetForm').dialog("open");
@@ -91,27 +90,6 @@ function initLogin() {
     $('#btnLogin').mousedown(function () {
         makeLogin();
     });
-
-    checkLocalStorage();
-}
-
-//Funcion Promise JSONS
-function getDate() {
-    var getJSON = jQuery.Deferred();
-    var getJSON2 = jQuery.Deferred();
-    getJSON.resolve(
-        //    JSON CHECKINGS
-        $.getJSON("../assets/PHP_y_JSON/date.json")
-    );
-    return getJSON.promise();
-}
-function getNames() {
-    var getJSON = jQuery.Deferred();
-    getJSON.resolve(
-        //    JSON CHECKINGS
-        $.getJSON("../assets/PHP_y_JSON/names.json")
-    );
-    return getJSON.promise();
 }
 //Funcion PROMISE DataTable
 function fillTable(language, arrayJson) {
@@ -176,64 +154,54 @@ function initDashboard() {
 
 //Funcion que inicia dataTables y rellena dataTable pasando por parametro el idioma
     function jsonDashBoard() {
-        var login2 = window.localStorage.getItem('login');
-        var dataJson;
         var arrayJson = [];
         //Llamada que comprueba que el token sea correcto
-        $.ajax({
-            url: "http://localhost/ionic/logAdmin.php",
-            type: "POST",
-            data: login2,
-            complete: function (resp) {
-                //Si es correcto
-                if (resp.responseText == 'OK') {
-                    var dates = $.ajax("../assets/PHP_y_JSON/date.json");
-                    var name = $.ajax("../assets/PHP_y_JSON/names.json");
-                    $.when(name, dates).done(function (name, dates) {
-                        name = name[0];
-                        dates = dates[0];
-                        $.each(name, function (g, nameP) {
-                            var nameUser = g;
-                            //Variable donde asignamos el nombre de usuario
-                            $.each(nameP, function (l, nameString) {
-                                $.each(dates, function (i, userName) {
-                                    $.each(userName, function (h, data) {
-                                        if (data != null) {
-                                            //Si el nombre de usuario es igual
-                                            if (data.usuario.toLowerCase() == nameUser) {
-                                                //Asignamos y añadimos al objeto data nombre y apellidos.
-                                                data.name = nameString.name;
-                                                data.firstname = nameString.firstname;
-                                                data.lastname = nameString.lastname;
-                                                arrayJson.push(data);
-                                            }
+        $.when(hasLog(window.localStorage.getItem('login'))).then(function (data) {
+            if (data == "OK") {
+                var name = $.ajax("../assets/PHP_y_JSON/names.json");
+                var dates = $.ajax("../assets/PHP_y_JSON/date.json");
+                $.when(name, dates).done(function (name, dates) {
+                    name = name[0];
+                    dates = dates[0];
+                    $.each(name, function (g, nameP) {
+                        var nameUser = g;
+                        //Variable donde asignamos el nombre de usuario
+                        $.each(nameP, function (l, nameString) {
+                            $.each(dates, function (i, userName) {
+                                $.each(userName, function (h, data) {
+                                    if (data != null) {
+                                        //Si el nombre de usuario es igual
+                                        if (data.usuario.toLowerCase() == nameUser) {
+                                            //Asignamos y añadimos al objeto data nombre y apellidos.
+                                            data.name = nameString.name;
+                                            data.firstname = nameString.firstname;
+                                            data.lastname = nameString.lastname;
+                                            arrayJson.push(data);
                                         }
-                                    })
+                                    }
                                 })
-                            });
-                        });
-                        //PRUEBA PROMISE TABLE
-                        $.when(fillTable(checkLanguage($('#languageSelect option:selected').attr("name")), arrayJson));
-                        //Funcion columnFilter
-                        //Añadir input a cada th footer
-                        $('#searchTeachers tfoot th').each(function () {
-                            var title = $(this).text();
-                            $(this).html('<input type="text" placeholder="Buscar ' + title + '" />');
-                        });
-                        //Asignar la busqueda de los inputs
-                        dataTable.columns().every(function () {
-                            var that = this;
-                            $('input', this.footer()).css('width', '90%');
-                            $('input', this.footer()).on('keyup change', function () {
-                                if (that.search() !== this.value) {
-                                    dataTable.search(this.value).draw();
-                                }
-                            });
+                            })
                         });
                     });
-                } else if (resp.responseText != 'OK') {
-                    $(location).attr('href', 'index.html')
-                }
+                    //PROMISE TABLE
+                    $.when(fillTable(checkLanguage($('#languageSelect option:selected').attr("name")), arrayJson));
+                    //Funcion columnFilter
+                    //Añadir input a cada th footer
+                    $('#searchTeachers tfoot th').each(function () {
+                        var title = $(this).text();
+                        $(this).html('<input type="text" placeholder="Buscar ' + title + '" />');
+                    });
+                    //Asignar la busqueda de los inputs
+                    dataTable.columns().every(function () {
+                        var that = this;
+                        $('input', this.footer()).css('width', '90%');
+                        $('input', this.footer()).on('keyup change', function () {
+                            if (that.search() !== this.value) {
+                                dataTable.search(this.value).draw();
+                            }
+                        });
+                    });
+                });
             }
         });
     }
@@ -247,36 +215,13 @@ function initDialog() {
             resetDialogInput();
         }
     });
-    // if($('#initAudit').dialog('isOpen')==true){
     initAudit();
-    // }
 }
 function resetDialogInput() {
     $('#dateInit').val('');
     $('#dateEnd').val('');
 }
-function filterData() {
-    var min = $('#dateInit').val();
-    var max = $('#dateEnd').val();
-    $.fn.dataTableExt.afnFiltering.push(
-        function (oSettings, aaData, iDataIndex) {
-            if (min && !isNaN(min)) {
-                if (aaData.fecha < min) {
-                    return false;
-                }
-            }
-            if (max && !isNaN(max)) {
-                if (aData.fecha > max) {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-    );
-    dataTable.draw();
-}
-//FUNCIONES PARA INFORMES
+// FUNCIONES PARA INFORMES
 function initAudit() {
     var dateInit;
     var dateEnd;
@@ -294,11 +239,7 @@ function initAudit() {
         }
     }
 
-    var login2 = window.localStorage.getItem('login');
-    var dataJson;
-    var arrayJson = [];
     var names = [];
-    var teachersNames = [];
     var formatDate = "dd-mm-yy";
     //Opciones para datepicker
     var datepickerOptions = {
@@ -317,79 +258,46 @@ function initAudit() {
         allowClear: true,
         data: ''
     };
-    $.ajax({
-        url: "http://localhost/ionic/logAdmin.php",
-        type: "POST",
-        data: login2,
-        complete: function (resp) {
-            //Si es correcto
-            if (resp.responseText == 'OK') {
-                //Llamada al json que contiene los marcajes
-                $.ajax({
-                    url: "http://localhost/ionic/date.json",
-                    type: "GET",
-                    complete: function (resp2) {
-                        checkDates();
-                        //Datepicker fecha de inicio
-                        dateInit = $('#dateInit').datepicker(datepickerOptions)
-                        //Limitar fecha final a que minimo sea la de inicio
-                            .on("change", function () {
-                                dateEnd.datepicker("option", "minDate", getDate(this));
-                                checkDates();
-                            });
-                        //Datepicker fecha final
-                        dateEnd = $('#dateEnd').datepicker(datepickerOptions)
-                        //Limitar fecha inicio a que maximo sea la de final
-                            .on("change", function () {
-                                dateInit.datepicker("option", "maxDate", getDate(this));
-                                checkDates();
-                            });
-                        //Funcion  que obtiene la fecha
-                        function getDate(element) {
-                            var date;
-                            try {
-                                date = $.datepicker.parseDate(formatDate, element.value);
-                            } catch (error) {
-                                date = null;
-                            }
-                            return date;
-                        }
-
-                        //Llamada al json que contiene los nombres y apellidos de los usuarios
-                        $.ajax({
-                            url: "http://localhost/ionic/names.json",
-                            type: "GET",
-                            complete: function (resp3) {
-                                names = JSON.parse(resp3.responseText);
-                                dataJson = JSON.parse(resp2.responseText);
-                                $.each(names, function (g, name) {
-                                    //Variable donde asignamos el nombre de usuario
-                                    var nameUser = g;
-                                    $.each(name, function (j, properties) {
-                                        teachersNames.push(properties.name);
-                                        $.each(dataJson, function (i, user) {
-                                            $.each(user, function (h, data) {
-                                                if (data != null) {
-                                                    //Si el nombre de usuario es igual
-                                                    if (data.usuario.toLowerCase() == nameUser) {
-                                                        //Asignamos y añadimos al objeto data nombre y apellidos.
-                                                        data.name = properties.name;
-                                                        data.firstname = properties.firstname;
-                                                        data.lastname = properties.lastname;
-                                                        arrayJson.push(data);
-                                                    }
-                                                }
-                                            });
-                                        });
-                                    });
-                                });
-                                selectOptions.data = teachersNames;
-                                $('#selectTeacher').select2(selectOptions);
-                            }
-                        });
-                    }
+    $.when(hasLog(window.localStorage.getItem('login'))).then(function (data) {
+        if (data == "OK") {
+            checkDates();
+            //Datepicker fecha de inicio
+            dateInit = $('#dateInit').datepicker(datepickerOptions)
+            //Limitar fecha final a que minimo sea la de inicio
+                .on("change", function () {
+                    dateEnd.datepicker("option", "minDate", getDate(this));
+                    checkDates();
                 });
+            //Datepicker fecha final
+            dateEnd = $('#dateEnd').datepicker(datepickerOptions)
+            //Limitar fecha inicio a que maximo sea la de final
+                .on("change", function () {
+                    dateInit.datepicker("option", "maxDate", getDate(this));
+                    checkDates();
+                });
+            //Funcion  que obtiene la fecha
+            function getDate(element) {
+                var date;
+                try {
+                    date = $.datepicker.parseDate(formatDate, element.value);
+                } catch (error) {
+                    date = null;
+                }
+                return date;
             }
+
+            //Llamada al json que contiene los nombres y apellidos de los usuarios
+            var name = $.ajax("../assets/PHP_y_JSON/names.json");
+            $.when(name).done(function (name) {
+                var teachersNames = [];
+                $.each(name, function (l, teacherName) {
+                    $.each(teacherName, function (m, properties) {
+                        teachersNames.push(properties.name);
+                    })
+                });
+                selectOptions.data = teachersNames;
+                $('#selectTeacher').select2(selectOptions);
+            });
         }
     });
 }

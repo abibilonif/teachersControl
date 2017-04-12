@@ -26,5 +26,12 @@
       "firstname": "Garcia",
       "lastname": "Lliteras"
     }
+  ],
+  "prueba": [
+    {
+      "name": "PruebaName",
+      "firstname": "PruebaFirstName",
+      "lastname": "PruebaLastName"
+    }
   ]
 }

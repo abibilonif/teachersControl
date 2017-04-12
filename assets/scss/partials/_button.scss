@@ -11,10 +11,10 @@ $list_name: "red" "blue" "green" "yellow" "orange" "ligth" "dark";
   }@else {
    color:white;
    font-weight: bolder;
-   padding: 1%;
+   padding: 0 2% 0 2%;
   }
   background-color: darken($color,20%);
-  border-color: darken($color,35%);
+  border: solid 0.2em darken($color,35%);
   border-radius: 5px;
   &:hover {
    color: darken($color,20%) !important;
@@ -22,6 +22,7 @@ $list_name: "red" "blue" "green" "yellow" "orange" "ligth" "dark";
     background-color: black !important;
    }@else {
     background-color:white !important;
+    border: solid 0.2em darken($color,35%);
    }
   }
  }

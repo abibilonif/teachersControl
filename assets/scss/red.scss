@@ -116,11 +116,47 @@ tbody {
   }
 }
 
+table.dataTable {
+  thead {
+      .sorting_asc::after {
+        font-size: 2.3em !important;
+        opacity: 1 !important;
+        content: "\2191" !important;
+      }
+      .sorting_desc {
+        &::after, &:after {
+          font-size: 2.3em !important;
+          opacity: 1 !important;
+          content: '\2193' !important;
+        }
+      }
+      .sorting::after {
+        font-weight: 200 !important;
+        font-size: 1.3em !important;
+        opacity: 0.8 !important;
+        content: '\21F5' !important;
+      }
+      .sorting, .sorting_asc, .sorting_desc, .sorting_both {
+        &:after {
+          background: none !important;
+        }
+      }
+    }
+}
+
 #searchTeachers {
   table-layout: fixed;
   display: inline-table;
   width: 100% !important;
   background-color: white;
+  thead {
+    tr {
+      th {
+        color: white !important;
+        border: solid 0.1em white;
+      }
+    }
+  }
 }
 
 .dt-button {
@@ -140,115 +176,134 @@ tbody {
     }
   }
 }
-  .ui-state-default, .ui-widget-content .ui-state-default, .ui-state-default {
-    background: darken($primary, 20%) !important;
-  }
-  .ui-button, .ui-state-default, .ui-datepicker-header {
-    background-color: darken($primary, 20%) !important;
-    color: white !important;
-    >a {
-      background-color: white !important;
-      color: darken($primary, 25%) !important;
-    }
-  }
-  .ui-widget-header {
-    text-align: center;
-    background: darken($primary, 20%) !important;
-    border: 0.2em solid darken($primary, 35%) !important;
-    color: white !important;
-  }
-  .ui-dialog .ui-dialog-title {
-    float: none;
-  }
 
-  .ui-datepicker-month, .ui-datepicker-year {
-    width: 100%;
-    -moz-appearance: none;
-    padding: 1%;
-    background-color: darken($primary, 20%) !important;
-    color: white;
-    font-weight: bolder !important;
-    border: 0.2em solid darken($primary, 35%) !important;
-    border-radius: 5px !important;
-    &:hover {
-      background-color: white !important;
-      color: darken($primary, 20%) !important;
-    }
-    > option {
-      background-color: white;
-      color: darken($primary, 25%);
-      ::selection {
-        color: white;
-      }
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-state-default {
+  background: darken($primary, 20%) !important;
+}
+
+.ui-button, .ui-state-default, .ui-datepicker-header {
+  background-color: darken($primary, 20%) !important;
+  color: white !important;
+  > a {
+    background-color: white !important;
+    color: darken($primary, 25%) !important;
+  }
+}
+
+.ui-widget-header {
+  text-align: center;
+  background: darken($primary, 20%) !important;
+  border: 0.2em solid darken($primary, 35%) !important;
+  color: white !important;
+}
+
+.ui-dialog .ui-dialog-title {
+  float: none;
+}
+
+.ui-datepicker-month, .ui-datepicker-year {
+  width: 100%;
+  -moz-appearance: none;
+  padding: 1%;
+  background-color: darken($primary, 20%) !important;
+  color: white;
+  font-weight: bolder !important;
+  border: 0.2em solid darken($primary, 35%) !important;
+  border-radius: 5px !important;
+  &:hover {
+    background-color: white !important;
+    color: darken($primary, 20%) !important;
+  }
+  > option {
+    background-color: white;
+    color: darken($primary, 25%);
+    ::selection {
+      color: white;
     }
   }
+}
+
 .ui-icon, .ui-widget-content .ui-icon {
   background-image: url("../../assets/js/jQueryUI-1.11.4/images/ui-icons_222222_256x240.png") !important;
 }
-#languageSelect{
+
+#languageSelect {
   width: 100%;
   -moz-appearance: none;
 }
-  //CSS AUDITS
-  .ui-widget-content {
-    background-color: white !important;
-    button.ui-state-default {
-      background-color: white !important;
-        &:hover {
-        border: 0.15em solid orangered !important;
+
+//CSS AUDITS
+.ui-widget-content {
+  background-color: white !important;
+  button.ui-button-text-only {
+    background: darken($primary, 25%) !important;
+    &:hover {
+      border: 0.1em inset darken($primary, 25%) !important;
+      background: white !important;
+      span {
+        color: darken($primary, 25%) !important;
       }
     }
   }
+  button.ui-dialog-titlebar-close {
+    background: white !important;
+    &:hover {
+      border: 0.15em inset darken($primary, 35%) !important;
+    }
+  }
+}
 
-  .ui-datepicker-calendar {
-    span {
+.ui-datepicker-calendar {
+  span {
+    color: white !important;
+  }
+  a.ui-state-default, .ui-icon-closethick, button.ui-state-default {
+    background-color: white !important;
+    color: darken($primary, 25%) !important;
+    &:hover {
+      background-color: darken($primary, 25%) !important;
       color: white !important;
     }
-    a.ui-state-default, .ui-icon-closethick, button.ui-state-default {
-      background-color: white !important;
-      color:darken($primary, 25%) !important;
-      &:hover {
-        background-color:darken($primary, 25%)!important;
-        color: white !important;
-      }
-    }
   }
-  .ui-datepicker-header {
-    background-color: white !important;
-  }
-  .dateLabel {
-    font-weight: bolder !important;
-    background-color: darken($primary, 20%) !important;
-    color: white !important;
-    border: 0.2em solid darken($primary, 35%) !important;
-    border-radius: 5px;
-  }
+}
 
-  .select2-container {
-    margin-top: 2%;
-    width: 80% !important;
-  }
+.ui-datepicker-header {
+  background-color: white !important;
+}
 
-  #formContent {
-    position: absolute;
-    top: 10%;
-    left: 20%;
-    margin: 0 auto;
-    text-align: center;
-    border-radius: 5px;
-    background-color: white;
-    width: 50%;
-    padding: 5%;
-    border: inset 0.1em darken($primary, 35%) !important;
-  }
+.dateLabel {
+  font-weight: bolder !important;
+  background-color: darken($primary, 20%) !important;
+  color: white !important;
+  border: 0.2em solid darken($primary, 35%) !important;
+  border-radius: 5px;
+}
 
-  .header-btn {
-    display: flex;
-    width: auto;
-    > button {
-      margin: 1%;
-    }
-    > select {
-      margin: 1%;
-    }
+.select2-container {
+  margin-top: 2%;
+  width: 80% !important;
+}
+
+#formContent {
+  position: absolute;
+  top: 10%;
+  left: 20%;
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 5px;
+  background-color: white;
+  width: 50%;
+  padding: 5%;
+  border: inset 0.1em darken($primary, 35%) !important;
+}
+
+.header-btn {
+  display: flex;
+  width: auto;
+  > button {
+    margin: 1%;
   }
+  > select {
+    margin: 1%;
+  }
+}
