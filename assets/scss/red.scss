@@ -118,27 +118,9 @@ tbody {
 
 table.dataTable {
   thead {
-      .sorting_asc::after {
-        font-size: 2.3em !important;
-        opacity: 1 !important;
-        content: "\2191" !important;
-      }
-      .sorting_desc {
-        &::after, &:after {
-          font-size: 2.3em !important;
-          opacity: 1 !important;
-          content: '\2193' !important;
-        }
-      }
-      .sorting::after {
-        font-weight: 200 !important;
-        font-size: 1.3em !important;
-        opacity: 0.8 !important;
-        content: '\21F5' !important;
-      }
       .sorting, .sorting_asc, .sorting_desc, .sorting_both {
-        &:after {
-          background: none !important;
+        &:after, &::after {
+          content: "" !important;
         }
       }
     }
@@ -224,7 +206,7 @@ table.dataTable {
 }
 
 .ui-icon, .ui-widget-content .ui-icon {
-  background-image: url("../../assets/js/jQueryUI-1.11.4/images/ui-icons_222222_256x240.png") !important;
+  background-image: url("../images/ui-icons_222222_256x240.png") !important;
 }
 
 #languageSelect {

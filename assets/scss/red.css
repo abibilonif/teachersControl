@@ -166,21 +166,8 @@ tbody {
   overflow: auto;
   text-overflow: ellipsis; }
 
-table.dataTable thead .sorting_asc::after {
-  font-size: 2.3em !important;
-  opacity: 1 !important;
-  content: "\2191" !important; }
-table.dataTable thead .sorting_desc::after, table.dataTable thead .sorting_desc:after {
-  font-size: 2.3em !important;
-  opacity: 1 !important;
-  content: '\2193' !important; }
-table.dataTable thead .sorting::after {
-  font-weight: 200 !important;
-  font-size: 1.3em !important;
-  opacity: 0.8 !important;
-  content: '\21F5' !important; }
-table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, table.dataTable thead .sorting_desc:after, table.dataTable thead .sorting_both:after {
-  background: none !important; }
+table.dataTable thead .sorting:after, table.dataTable thead .sorting::after, table.dataTable thead .sorting_asc:after, table.dataTable thead .sorting_asc::after, table.dataTable thead .sorting_desc:after, table.dataTable thead .sorting_desc::after, table.dataTable thead .sorting_both:after, table.dataTable thead .sorting_both::after {
+  content: "" !important; }
 
 #searchTeachers {
   table-layout: fixed;
@@ -240,7 +227,7 @@ table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, 
       color: white; }
 
 .ui-icon, .ui-widget-content .ui-icon {
-  background-image: url("../../assets/js/jQueryUI-1.11.4/images/ui-icons_222222_256x240.png") !important; }
+  background-image: url("../images/ui-icons_222222_256x240.png") !important; }
 
 #languageSelect {
   width: 100%;
