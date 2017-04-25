@@ -382,5 +382,14 @@
       "hora": "15:49:24",
       "tipo": "Entrada"
     }
+  ],
+  "65": [
+    {
+      "id": 8,
+      "usuario": "Sandra",
+      "fecha": "19-03-17",
+      "hora": "15:49:24",
+      "tipo": "Entrada"
+    }
   ]
 }

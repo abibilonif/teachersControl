@@ -146,6 +146,17 @@ main {
   width: 90%;
   background-color: white; }
 
+.buttons-html5 {
+  text-decoration: none !important;
+  background-color: #a82315 !important;
+  border: 0.2em solid #64150c !important;
+  border-radius: 5px;
+  margin: 1%;
+  padding: 1%; }
+  .buttons-html5:hover {
+    color: #a82315 !important;
+    background-color: white !important; }
+
 thead {
   background-color: #a82315 !important;
   font-weight: bolder;
@@ -189,11 +200,8 @@ table.dataTable thead .sorting:after, table.dataTable thead .sorting::after, tab
   color: #a82315 !important;
   background-color: white !important; }
 
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-state-default {
-  background: #a82315 !important; }
-
 .ui-button, .ui-state-default, .ui-datepicker-header {
-  background-color: #a82315 !important;
+  background-color: white !important;
   color: white !important; }
   .ui-button > a, .ui-state-default > a, .ui-datepicker-header > a {
     background-color: white !important;
@@ -205,8 +213,15 @@ table.dataTable thead .sorting:after, table.dataTable thead .sorting::after, tab
   border: 0.2em solid #64150c !important;
   color: white !important; }
 
+.ui-state-hover {
+  border-color: #921e12 !important;
+  background-color: #fbdedb !important; }
+
 .ui-dialog .ui-dialog-title {
   float: none; }
+
+.ui-dialog-content {
+  background-color: white !important; }
 
 .ui-datepicker-month, .ui-datepicker-year {
   width: 100%;
@@ -227,44 +242,36 @@ table.dataTable thead .sorting:after, table.dataTable thead .sorting::after, tab
       color: white; }
 
 .ui-icon, .ui-widget-content .ui-icon {
-  background-image: url("../images/ui-icons_222222_256x240.png") !important; }
+  background-image: url("../../images/ui-icons_222222_256x240.png") !important; }
 
 #languageSelect {
   width: 100%;
   -moz-appearance: none; }
 
-.ui-widget-content {
-  background-color: white !important; }
-  .ui-widget-content button.ui-button-text-only {
+#initAudit {
+  width: 100%;
+  display: inline;
+  margin-right: 0 !important;
+  text-align: center; }
+  #initAudit button.ui-button-text-only {
     background: #921e12 !important; }
-    .ui-widget-content button.ui-button-text-only:hover {
+    #initAudit button.ui-button-text-only:hover {
       border: 0.1em inset #921e12 !important;
       background: white !important; }
-      .ui-widget-content button.ui-button-text-only:hover span {
+      #initAudit button.ui-button-text-only:hover span {
         color: #921e12 !important; }
-  .ui-widget-content button.ui-dialog-titlebar-close {
-    background: white !important; }
-    .ui-widget-content button.ui-dialog-titlebar-close:hover {
-      border: 0.15em inset #64150c !important; }
 
-.ui-datepicker-calendar span {
-  color: white !important; }
-.ui-datepicker-calendar a.ui-state-default, .ui-datepicker-calendar .ui-icon-closethick, .ui-datepicker-calendar button.ui-state-default {
-  background-color: white !important;
-  color: #921e12 !important; }
-  .ui-datepicker-calendar a.ui-state-default:hover, .ui-datepicker-calendar .ui-icon-closethick:hover, .ui-datepicker-calendar button.ui-state-default:hover {
-    background-color: #921e12 !important;
+.ui-datepicker-calendar {
+  width: 30%;
+  margin: 1%; }
+  .ui-datepicker-calendar span {
     color: white !important; }
-
-.ui-datepicker-header {
-  background-color: white !important; }
-
-.dateLabel {
-  font-weight: bolder !important;
-  background-color: #a82315 !important;
-  color: white !important;
-  border: 0.2em solid #64150c !important;
-  border-radius: 5px; }
+  .ui-datepicker-calendar a.ui-state-default, .ui-datepicker-calendar .ui-icon-closethick, .ui-datepicker-calendar button.ui-state-default {
+    background-color: white !important;
+    color: #921e12 !important; }
+    .ui-datepicker-calendar a.ui-state-default:hover, .ui-datepicker-calendar .ui-icon-closethick:hover, .ui-datepicker-calendar button.ui-state-default:hover {
+      background-color: #921e12 !important;
+      color: white !important; }
 
 .select2-container {
   margin-top: 2%;
@@ -283,11 +290,15 @@ table.dataTable thead .sorting:after, table.dataTable thead .sorting::after, tab
   border: inset 0.1em #64150c !important; }
 
 .header-btn {
-  display: flex;
-  width: auto; }
-  .header-btn > button {
-    margin: 1%; }
-  .header-btn > select {
-    margin: 1%; }
+  display: inline-table;
+  width: 120%;
+  margin-left: 0 !important; }
+  .header-btn > div {
+    padding: 1%;
+    margin: 0.5%;
+    float: left; }
+
+caption {
+  display: inline !important; }
 
 /*# sourceMappingURL=red.css.map */

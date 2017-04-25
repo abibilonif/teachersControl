@@ -2,7 +2,9 @@
  * Created by laia on 17/03/17.
  */
 //FUNCIONES GLOBALES
-var dataTable;
+var teachersTable;
+var tableexport;
+
 checkLocalStorage();
 function hasLog(data) {
     //    Llamada AJAX
@@ -13,7 +15,7 @@ function hasLog(data) {
 }
 //Funcion que comprueba si hay login
 function checkLocalStorage() {
-    $("#contentDialog").css('display','hide');
+    $("#contentDialog").css('display', 'hide');
     if ($(location).attr('href').indexOf('index.html') != -1) {
         //Dialog de error de login
         $("#resetForm").dialog({
@@ -28,7 +30,7 @@ function checkLocalStorage() {
         });
         if (localStorage.login == undefined) {
             initLogin();
-        }else{
+        } else {
             $(location).attr('href', 'dashboard.html');
         }
     } else if ($(location).attr('href').indexOf('dashboard.html') != -1) {
@@ -100,7 +102,7 @@ function fillTable(language, arrayJson) {
         //Datos que pasamos a la tabla provinientes del json
         'aaData': arrayJson,
         "aoColumns": [
-            //Asinamos a las columnas los datos que debe mostrar
+            //Asignamos a las columnas los datos que debe mostrar
             {"sTitle": "Usuario", "mData": "usuario"},
             {"sTitle": "Nombre", "mData": "name"},
             {"sTitle": "1º Apellido", "mData": "firstname"},
@@ -121,13 +123,14 @@ function fillTable(language, arrayJson) {
     var table = jQuery.Deferred();
     table.resolve(
         //Generamos el datatable
-        dataTable = $('#searchTeachers').DataTable(optionsDataTable)
+        teachersTable = $('#searchTeachers').DataTable(optionsDataTable)
     );
+
     return table.promise();
 }
 //FUNCIONES PARA DASHBOARD
 function initDashboard() {
-    $('#initAudit').css('display', 'none');
+    tableexport = $('#searchTeachers').tableExport();
     //Variables traduccion
     function checkLanguage(nameLanguage) {
         switch (nameLanguage) {
@@ -148,11 +151,25 @@ function initDashboard() {
 
     //EventListener del select de idiomas
     $('#languageSelect').change(function () {
-        dataTable.destroy();
+        teachersTable.destroy();
         jsonDashBoard(checkLanguage($('#languageSelect option:selected').attr("name")));
     });
-
-//Funcion que inicia dataTables y rellena dataTable pasando por parametro el idioma
+    $('#dateInit').change(function () {
+        teachersTable.destroy();
+        jsonDashBoard(checkLanguage($('#languageSelect option:selected').attr("name")));
+    });
+    $('#dateEnd').change(function () {
+        teachersTable.destroy();
+        jsonDashBoard(checkLanguage($('#languageSelect option:selected').attr("name")));
+    });
+    $('#selectTeacher').change(function (e) {
+        teachersTable.destroy();
+        jsonDashBoard(checkLanguage($('#languageSelect option:selected').attr("name")));
+    });
+    $('#btnAudit').click(function () {
+        var tables = $('#searchTeachers').tableExport();
+    });
+//Funcion que inicia dataTables y rellena dataTable
     function jsonDashBoard() {
         var arrayJson = [];
         //Llamada que comprueba que el token sea correcto
@@ -160,44 +177,86 @@ function initDashboard() {
             if (data == "OK") {
                 var name = $.ajax("../assets/PHP_y_JSON/names.json");
                 var dates = $.ajax("../assets/PHP_y_JSON/date.json");
+                //Cuando las llamadas tengan respuesta
                 $.when(name, dates).done(function (name, dates) {
                     name = name[0];
                     dates = dates[0];
                     $.each(name, function (g, nameP) {
-                        var nameUser = g;
                         //Variable donde asignamos el nombre de usuario
+                        var nameUser = g;
                         $.each(nameP, function (l, nameString) {
                             $.each(dates, function (i, userName) {
                                 $.each(userName, function (h, data) {
                                     if (data != null) {
-                                        //Si el nombre de usuario es igual
+                                        //Si el nombre de usuario es igual al del check
                                         if (data.usuario.toLowerCase() == nameUser) {
                                             //Asignamos y añadimos al objeto data nombre y apellidos.
                                             data.name = nameString.name;
                                             data.firstname = nameString.firstname;
                                             data.lastname = nameString.lastname;
-                                            arrayJson.push(data);
+                                            var initDate=$('#dateInit').val().split('-').reverse();
+                                            initDate=initDate.join("-");
+                                            var endDate=$('#dateEnd').val().split('-').reverse();
+                                            endDate=endDate.join('-');
+                                            var splitFecha = data.fecha.split('-');
+                                            data.fecha = splitFecha[0] + '-' + splitFecha[1] + '-' + ('20' + splitFecha[2]);
+                                            if(initDate!="" || endDate!=""){
+                                                var tempDataFecha=data.fecha.split('-').reverse();
+                                                    tempDataFecha=tempDataFecha.join('-');
+                                                if(tempDataFecha.localeCompare(initDate)==1 && endDate==""
+                                                || tempDataFecha.localeCompare(endDate)==-1 && initDate==""
+                                                || tempDataFecha.localeCompare(initDate)==1 && tempDataFecha.localeCompare(endDate)==-1
+                                                || tempDataFecha.localeCompare(initDate)==0 || tempDataFecha.localeCompare(endDate)==0){
+                                                    if($('#selectTeacher').val()!=null){
+                                                        var names=$('#selectTeacher').val();
+                                                        $.each(names,function (i,name) {
+                                                            if(data.name==name){
+                                                                arrayJson.push(data);
+                                                            }
+                                                        })
+                                                    }else {
+                                                        arrayJson.push(data);
+                                                    }
+                                                }
+                                            }else {
+                                                if($('#selectTeacher').val()!=null){
+                                                    var names=$('#selectTeacher').val();
+                                                    $.each(names,function (i,name) {
+                                                        if(data.name==name){
+                                                            arrayJson.push(data);
+                                                        }
+                                                    })
+                                                }else {
+                                                    arrayJson.push(data);
+                                                }
+                                            }
                                         }
                                     }
                                 })
                             })
                         });
                     });
-                    //PROMISE TABLE
-                    $.when(fillTable(checkLanguage($('#languageSelect option:selected').attr("name")), arrayJson));
-                    //Funcion columnFilter
+                    //PROMISE TABLE CON PARAMETRO DE IDIOMA, Y ARRAYJSON
+                    $.when(fillTable(checkLanguage($('#languageSelect option:selected').attr("name")), arrayJson)).
+                        done(function(){
+                            console.log("Updating table export");
+                        tableexport.update({
+                            filename: "newFile"         // pass in a new set of options
+                        });
+                        console.log(tableexport);
+                    });
                     //Añadir input a cada th footer
                     $('#searchTeachers tfoot th').each(function () {
                         var title = $(this).text();
                         $(this).html('<input type="text" placeholder="Buscar ' + title + '" />');
                     });
                     //Asignar la busqueda de los inputs
-                    dataTable.columns().every(function () {
+                    teachersTable.columns().every(function () {
                         var that = this;
                         $('input', this.footer()).css('width', '90%');
                         $('input', this.footer()).on('keyup change', function () {
                             if (that.search() !== this.value) {
-                                dataTable.search(this.value).draw();
+                                teachersTable.search(this.value).draw();
                             }
                         });
                     });
@@ -206,98 +265,89 @@ function initDashboard() {
         });
     }
 
-    jsonDashBoard(checkLanguage("castellano"));
-}
-//Funcion que inicia dialog de informe
-function initDialog() {
-    $('#initAudit').dialog({
-        close: function () {
-            resetDialogInput();
-        }
-    });
+    jsonDashBoard(checkLanguage($('#languageSelect option:selected').attr("name")));
     initAudit();
-}
-function resetDialogInput() {
-    $('#dateInit').val('');
-    $('#dateEnd').val('');
-}
 // FUNCIONES PARA INFORMES
-function initAudit() {
-    var dateInit;
-    var dateEnd;
+    function initAudit() {
+        var dateInit;
+        var dateEnd;
 
-    function checkDates() {
-        //Comprobacion de dates para habilitar o deshabilitar boton
-        if (dateInit == undefined || dateEnd == undefined) {
-            $('#btnAudit').prop("disabled", true);
-            return false;
-        } else {
-            if (dateInit.val() != "" && dateEnd.val() != "") {
-                $('#btnAudit').prop("disabled", false);
-                return true;
+        function checkDates() {
+            //Comprobacion de dates para habilitar o deshabilitar boton
+            if (dateInit == undefined || dateEnd == undefined || dateInit.val()=="" || dateEnd.val()=="") {
+                $('#btnAudit').prop("disabled", true);
+                return false;
+            } else {
+                if (dateInit.val() != "" && dateEnd.val() != "") {
+                    $('#btnAudit').prop("disabled", false);
+                    return true;
+                }
             }
         }
+
+        var names = [];
+        //Opciones para datepicker
+        var datepickerOptions = {
+            firstDay: 1,
+            dateFormat: "dd-mm-yy",
+            dayNames: ["Diumenge", "Dilluns", "Dimarts", "Dimecres", "Dijous", "Divendres", "Dissabte"],
+            dayNamesMin: ["Dg", "Dl", "Dm", "Dc", "Dj", "Dv", "Ds"],
+            monthNames: ["Gener", "Febrer", "Març", "Abril", "Maig", "Juny", "Juriol", "Agost", "Setembre", "Octubre", "Novembre", "Desembre"],
+            monthNamesShort: ["Gen", "Feb", "Març", "Abr", "Maig", "Juny", "Jul", "Ag", "Set", "Oct", "Nov", "Des"],
+            changeMonth: true,
+            changeYear: true
+        };
+        //Opciones para select2
+        var selectOptions = {
+            placeholder: "Selecciona un professor",
+            data: ''
+        };
+        //Funcion filtrar columnas
+        //Cuando el loggeo de OK
+        $.when(hasLog(window.localStorage.getItem('login'))).then(function (data) {
+            if (data == "OK") {
+                checkDates();
+                //Datepicker fecha de inicio
+                dateInit = $('#dateInit').datepicker(datepickerOptions)
+                //Limitar fecha final a que minimo sea la de inicio
+                    .on("change", function () {
+                        dateEnd.datepicker("option", "minDate", getDate(this));
+                        checkDates();
+                    });
+                //Datepicker fecha final
+                dateEnd = $('#dateEnd').datepicker(datepickerOptions)
+                //Limitar fecha inicio a que maximo sea la de final
+                    .on("change", function () {
+                        dateInit.datepicker("option", "maxDate", getDate(this));
+                        checkDates();
+                    });
+                //Llamada al json que contiene los nombres y apellidos de los usuarios
+                var name = $.ajax("../assets/PHP_y_JSON/names.json");
+                $.when(name).done(function (name) {
+                    var teachersNames = [];
+                    $.each(name, function (l, teacherName) {
+                        $.each(teacherName, function (m, properties) {
+                            teachersNames.push(properties.name);
+                        })
+                    });
+                    selectOptions.data = teachersNames;
+                    $('#selectTeacher').select2(selectOptions);
+                });
+            }
+        });
     }
 
-    var names = [];
-    var formatDate = "dd-mm-yy";
-    //Opciones para datepicker
-    var datepickerOptions = {
-        firstDay: 1,
-        dateFormat: "dd-mm-yy",
-        dayNames: ["Diumenge", "Dilluns", "Dimarts", "Dimecres", "Dijous", "Divendres", "Dissabte"],
-        dayNamesMin: ["Dg", "Dl", "Dm", "Dc", "Dj", "Dv", "Ds"],
-        monthNames: ["Gener", "Febrer", "Març", "Abril", "Maig", "Juny", "Juriol", "Agost", "Setembre", "Octubre", "Novembre", "Desembre"],
-        monthNamesShort: ["Gen", "Feb", "Març", "Abr", "Maig", "Juny", "Jul", "Ag", "Set", "Oct", "Nov", "Des"],
-        changeMonth: true,
-        changeYear: true
-    };
-    //Opciones para select2
-    var selectOptions = {
-        placeholder: "Selecciona un professor",
-        allowClear: true,
-        data: ''
-    };
-    $.when(hasLog(window.localStorage.getItem('login'))).then(function (data) {
-        if (data == "OK") {
-            checkDates();
-            //Datepicker fecha de inicio
-            dateInit = $('#dateInit').datepicker(datepickerOptions)
-            //Limitar fecha final a que minimo sea la de inicio
-                .on("change", function () {
-                    dateEnd.datepicker("option", "minDate", getDate(this));
-                    checkDates();
-                });
-            //Datepicker fecha final
-            dateEnd = $('#dateEnd').datepicker(datepickerOptions)
-            //Limitar fecha inicio a que maximo sea la de final
-                .on("change", function () {
-                    dateInit.datepicker("option", "maxDate", getDate(this));
-                    checkDates();
-                });
-            //Funcion  que obtiene la fecha
-            function getDate(element) {
-                var date;
-                try {
-                    date = $.datepicker.parseDate(formatDate, element.value);
-                } catch (error) {
-                    date = null;
-                }
-                return date;
-            }
-
-            //Llamada al json que contiene los nombres y apellidos de los usuarios
-            var name = $.ajax("../assets/PHP_y_JSON/names.json");
-            $.when(name).done(function (name) {
-                var teachersNames = [];
-                $.each(name, function (l, teacherName) {
-                    $.each(teacherName, function (m, properties) {
-                        teachersNames.push(properties.name);
-                    })
-                });
-                selectOptions.data = teachersNames;
-                $('#selectTeacher').select2(selectOptions);
-            });
+//Funcion  que obtiene la fecha
+    function getDate(element) {
+        var formatDate = "dd-mm-yy";
+        var date;
+        try {
+            date = $.datepicker.parseDate(formatDate, element.value);
+        } catch (error) {
+            date = null;
         }
-    });
+        return date;
+    }
 }
+
+

@@ -2,11 +2,13 @@
  * Created by laia on 11/04/17.
  */
 var gulp = require('gulp');
+var replace=require('gulp-replace');
 var concat = require('gulp-concat');
 var sass = require('gulp-sass');
 var pump = require('pump');
 var minifyCss = require('gulp-clean-css');
 
+var imgDir="../assets/images/";
 gulp.task('sassCompiler', function () {
     return gulp.src('./assets/**/**/*.scss')
         .pipe(sass())
@@ -18,4 +20,4 @@ gulp.task('packageCss', function () {
         .pipe(minifyCss())
         .pipe(gulp.dest('./assets/css/'))
 });
-gulp.task('doIt', ['sassCompiler', 'packageCss']);
+gulp.task('doIt', ['sassCompiler','packageCss']);

@@ -87,6 +87,19 @@ main {
   background-color: white;
 }
 
+.buttons-html5 {
+  text-decoration: none !important;
+  background-color: darken($primary, 20%) !important;
+  border: 0.2em solid darken($primary, 35%) !important;
+  border-radius: 5px;
+  margin: 1%;
+  padding: 1%;
+  &:hover {
+    color: darken($primary, 20%) !important;
+    background-color: white !important;
+  }
+}
+
 thead {
   background-color: darken($primary, 20%) !important;
   font-weight: bolder;
@@ -118,12 +131,12 @@ tbody {
 
 table.dataTable {
   thead {
-      .sorting, .sorting_asc, .sorting_desc, .sorting_both {
-        &:after, &::after {
-          content: "" !important;
-        }
+    .sorting, .sorting_asc, .sorting_desc, .sorting_both {
+      &:after, &::after {
+        content: "" !important;
       }
     }
+  }
 }
 
 #searchTeachers {
@@ -159,12 +172,8 @@ table.dataTable {
   }
 }
 
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-state-default {
-  background: darken($primary, 20%) !important;
-}
-
 .ui-button, .ui-state-default, .ui-datepicker-header {
-  background-color: darken($primary, 20%) !important;
+  background-color: white !important;
   color: white !important;
   > a {
     background-color: white !important;
@@ -179,8 +188,19 @@ table.dataTable {
   color: white !important;
 }
 
+.ui-state-hover {
+  border-color: darken($primary, 25%) !important;
+  background-color: lighten($primary, 35%) !important;
+}
+
 .ui-dialog .ui-dialog-title {
   float: none;
+
+}
+
+.ui-dialog-content {
+  background-color: white !important;
+
 }
 
 .ui-datepicker-month, .ui-datepicker-year {
@@ -206,7 +226,7 @@ table.dataTable {
 }
 
 .ui-icon, .ui-widget-content .ui-icon {
-  background-image: url("../images/ui-icons_222222_256x240.png") !important;
+  background-image: url("../../images/ui-icons_222222_256x240.png") !important;
 }
 
 #languageSelect {
@@ -215,8 +235,11 @@ table.dataTable {
 }
 
 //CSS AUDITS
-.ui-widget-content {
-  background-color: white !important;
+#initAudit {
+  width: 100%;
+  display: inline;
+  margin-right: 0 !important;
+  text-align: center;
   button.ui-button-text-only {
     background: darken($primary, 25%) !important;
     &:hover {
@@ -227,15 +250,11 @@ table.dataTable {
       }
     }
   }
-  button.ui-dialog-titlebar-close {
-    background: white !important;
-    &:hover {
-      border: 0.15em inset darken($primary, 35%) !important;
-    }
-  }
 }
 
 .ui-datepicker-calendar {
+  width: 30%;
+  margin: 1%;
   span {
     color: white !important;
   }
@@ -247,18 +266,6 @@ table.dataTable {
       color: white !important;
     }
   }
-}
-
-.ui-datepicker-header {
-  background-color: white !important;
-}
-
-.dateLabel {
-  font-weight: bolder !important;
-  background-color: darken($primary, 20%) !important;
-  color: white !important;
-  border: 0.2em solid darken($primary, 35%) !important;
-  border-radius: 5px;
 }
 
 .select2-container {
@@ -280,12 +287,16 @@ table.dataTable {
 }
 
 .header-btn {
-  display: flex;
-  width: auto;
-  > button {
-    margin: 1%;
+  display: inline-table;
+  width: 120%;
+  margin-left: 0 !important;
+  > div {
+    padding: 1%;
+    margin: 0.5%;
+    float: left;
   }
-  > select {
-    margin: 1%;
-  }
+}
+
+caption {
+  display: inline !important;
 }
