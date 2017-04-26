@@ -9,7 +9,7 @@ checkLocalStorage();
 function hasLog(data) {
     //    Llamada AJAX
     var log = $.ajax({url: "http://localhost/ionic/logAdmin.php", type: "POST", data: data});
-    return log.done(function (resp) {
+    log.done(function (resp) {
         return resp;
     });
 }
@@ -55,14 +55,10 @@ function initLogin() {
             pass: $('#passUser').val()
         };
         if (login.user && login.pass) {
-            $.when(hasLog(login)).then(function (data) {
-                if (data == "OK") {
+            $.when(hasLog(login)== "OK").then(function (data) {
                     window.localStorage.setItem('login', JSON.stringify(login));
                     $(location).attr('href', 'dashboard.html');
                     initDashboard();
-                } else {
-                    $('#resetForm').dialog("open");
-                }
             });
         } else {
             $('#contentDialog').html("Introduce usuario y contraseña");
@@ -130,9 +126,9 @@ function fillTable(language, arrayJson) {
 }
 //FUNCIONES PARA DASHBOARD
 function initDashboard() {
-    tableexport = $('#searchTeachers').tableExport();
     //Variables traduccion
-    function checkLanguage(nameLanguage) {
+    function checkLanguage() {
+        var nameLanguage=$('#languageSelect option:selected').attr("name");
         switch (nameLanguage) {
             case "catalan":
                 return {
@@ -152,29 +148,25 @@ function initDashboard() {
     //EventListener del select de idiomas
     $('#languageSelect').change(function () {
         teachersTable.destroy();
-        jsonDashBoard(checkLanguage($('#languageSelect option:selected').attr("name")));
+        jsonDashBoard(checkLanguage());
     });
     $('#dateInit').change(function () {
         teachersTable.destroy();
-        jsonDashBoard(checkLanguage($('#languageSelect option:selected').attr("name")));
+        jsonDashBoard(checkLanguage());
     });
     $('#dateEnd').change(function () {
         teachersTable.destroy();
-        jsonDashBoard(checkLanguage($('#languageSelect option:selected').attr("name")));
+        jsonDashBoard(checkLanguage());
     });
-    $('#selectTeacher').change(function (e) {
+    $('#selectTeacher').change(function () {
         teachersTable.destroy();
-        jsonDashBoard(checkLanguage($('#languageSelect option:selected').attr("name")));
-    });
-    $('#btnAudit').click(function () {
-        var tables = $('#searchTeachers').tableExport();
+        jsonDashBoard(checkLanguage());
     });
 //Funcion que inicia dataTables y rellena dataTable
     function jsonDashBoard() {
         var arrayJson = [];
         //Llamada que comprueba que el token sea correcto
-        $.when(hasLog(window.localStorage.getItem('login'))).then(function (data) {
-            if (data == "OK") {
+        $.when(hasLog(window.localStorage.getItem('login'))== "OK").then(function (data) {
                 var name = $.ajax("../assets/PHP_y_JSON/names.json");
                 var dates = $.ajax("../assets/PHP_y_JSON/date.json");
                 //Cuando las llamadas tengan respuesta
@@ -237,13 +229,21 @@ function initDashboard() {
                         });
                     });
                     //PROMISE TABLE CON PARAMETRO DE IDIOMA, Y ARRAYJSON
-                    $.when(fillTable(checkLanguage($('#languageSelect option:selected').attr("name")), arrayJson)).
+                    $.when(fillTable(checkLanguage(), arrayJson)).
                         done(function(){
-                            console.log("Updating table export");
+                        //     console.log("Updating table export");
+                        if(tableexport==undefined) {
+                            tableexport = $('table').tableExport();
+                        }else{
+                            tableexport.reset();
+                        }
                         tableexport.update({
-                            filename: "newFile"         // pass in a new set of options
+                            position:"top",
+                            footers:false,
+                            formats:["xls"],
+                            bootstrap:false
                         });
-                        console.log(tableexport);
+                        // console.log(tableexport);
                     });
                     //Añadir input a cada th footer
                     $('#searchTeachers tfoot th').each(function () {
@@ -261,17 +261,15 @@ function initDashboard() {
                         });
                     });
                 });
-            }
         });
     }
 
-    jsonDashBoard(checkLanguage($('#languageSelect option:selected').attr("name")));
+    jsonDashBoard(checkLanguage());
     initAudit();
 // FUNCIONES PARA INFORMES
     function initAudit() {
         var dateInit;
         var dateEnd;
-
         function checkDates() {
             //Comprobacion de dates para habilitar o deshabilitar boton
             if (dateInit == undefined || dateEnd == undefined || dateInit.val()=="" || dateEnd.val()=="") {
@@ -304,8 +302,7 @@ function initDashboard() {
         };
         //Funcion filtrar columnas
         //Cuando el loggeo de OK
-        $.when(hasLog(window.localStorage.getItem('login'))).then(function (data) {
-            if (data == "OK") {
+        $.when(hasLog(window.localStorage.getItem('login'))== "OK").then(function (data) {
                 checkDates();
                 //Datepicker fecha de inicio
                 dateInit = $('#dateInit').datepicker(datepickerOptions)
@@ -333,7 +330,6 @@ function initDashboard() {
                     selectOptions.data = teachersNames;
                     $('#selectTeacher').select2(selectOptions);
                 });
-            }
         });
     }
 

@@ -242,7 +242,7 @@ table.dataTable thead .sorting:after, table.dataTable thead .sorting::after, tab
       color: white; }
 
 .ui-icon, .ui-widget-content .ui-icon {
-  background-image: url("../../images/ui-icons_222222_256x240.png") !important; }
+  background-image: url("../css/images/ui-icons_222222_256x240.png") !important; }
 
 #languageSelect {
   width: 100%;
