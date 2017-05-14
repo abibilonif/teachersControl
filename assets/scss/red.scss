@@ -112,7 +112,6 @@ thead {
     color: white !important;
   }
 }
-
 tbody {
   width: 100%;
 }
@@ -241,6 +240,19 @@ table.dataTable {
   margin-right: 0 !important;
   text-align: center;
   button.ui-button-text-only {
+    background: darken($primary, 25%) !important;
+    &:hover {
+      border: 0.1em inset darken($primary, 25%) !important;
+      background: white !important;
+      span {
+        color: darken($primary, 25%) !important;
+      }
+    }
+  }
+}
+#searchTeachers_length{
+  margin: 1%;
+  select{
     background: darken($primary, 25%) !important;
     &:hover {
       border: 0.1em inset darken($primary, 25%) !important;

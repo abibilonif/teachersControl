@@ -261,6 +261,16 @@ table.dataTable thead .sorting:after, table.dataTable thead .sorting::after, tab
       #initAudit button.ui-button-text-only:hover span {
         color: #921e12 !important; }
 
+#searchTeachers_length {
+  margin: 1%; }
+  #searchTeachers_length select {
+    background: #921e12 !important; }
+    #searchTeachers_length select:hover {
+      border: 0.1em inset #921e12 !important;
+      background: white !important; }
+      #searchTeachers_length select:hover span {
+        color: #921e12 !important; }
+
 .ui-datepicker-calendar {
   width: 30%;
   margin: 1%; }
