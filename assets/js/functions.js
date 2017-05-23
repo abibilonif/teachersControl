@@ -339,35 +339,38 @@ function initDashboard() {
         };
         //Funcion filtrar columnas
         //Cuando el loggeo de OK
-        $.when(hasLog(window.localStorage.getItem('login')) == "OK").then(function (data) {
-            checkDates();
-            //Datepicker fecha de inicio
-            dateInit = $('#dateInit').datepicker(datepickerOptions)
-            //Limitar fecha final a que minimo sea la de inicio
-                .on("change", function () {
-                    dateEnd.datepicker("option", "minDate", getDate(this));
-                    checkDates();
+        $.when(hasLog(window.localStorage.getItem('login'))).then(function (data) {
+            if(data=="OK") {
+                checkDates();
+                //Datepicker fecha de inicio
+                dateInit = $('#dateInit').datepicker(datepickerOptions)
+                //Limitar fecha final a que minimo sea la de inicio
+                    .on("change", function () {
+                        dateEnd.datepicker("option", "minDate", getDate(this));
+                        checkDates();
+                    });
+                //Datepicker fecha final
+                dateEnd = $('#dateEnd').datepicker(datepickerOptions)
+                //Limitar fecha inicio a que maximo sea la de final
+                    .on("change", function () {
+                        dateInit.datepicker("option", "maxDate", getDate(this));
+                        checkDates();
+                    });
+                //Llamada al json que contiene los nombres y apellidos de los usuarios
+                var name = $.ajax("../assets/PHP_y_JSON/names.json");
+                $.when(name).done(function (name) {
+                    var teachersNames = [];
+                    $.each(name, function (l, teacherName) {
+                        $.each(teacherName, function (m, properties) {
+                            teachersNames.push(properties.name);
+                        })
+                    });
+                    selectOptions.data = teachersNames;
+                    $('#selectTeacher').select2(selectOptions);
                 });
-            //Datepicker fecha final
-            dateEnd = $('#dateEnd').datepicker(datepickerOptions)
-            //Limitar fecha inicio a que maximo sea la de final
-                .on("change", function () {
-                    dateInit.datepicker("option", "maxDate", getDate(this));
-                    checkDates();
-                });
-            //Llamada al json que contiene los nombres y apellidos de los usuarios
-            var name = $.ajax("../assets/PHP_y_JSON/names.json");
-            $.when(name).done(function (name) {
-                var teachersNames = [];
-                $.each(name, function (l, teacherName) {
-                    $.each(teacherName, function (m, properties) {
-                        teachersNames.push(properties.name);
-                    })
-                });
-                selectOptions.data = teachersNames;
-                $('#selectTeacher').select2(selectOptions);
-            });
+            }
         });
+
     }
 
 //Funcion  que obtiene la fecha
